@@ -16,3 +16,5 @@ step-2) run the npm run build.
 step-3) pkg server.js --targets node18-win-x64 --output SaralaxeIndia.exe
 
 step-4) agar hume client ka image se exe banani hai to hum wo bhi kar sakte hai
+
+step-5) isko run krne ke liye dist folder chahiye aur dist folder ke bahar ye meri exe hono chahiye tbhi ye exe jo hai dist folder me jo files hai unko serve karti hai browser me means ki meri website ko
