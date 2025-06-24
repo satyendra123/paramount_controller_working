@@ -1,0 +1,31 @@
+step-1 npm install -g pkg
+step-2 npm install serve-handler
+
+step-3 make the server.js file
+
+const { spawn } = require("child_process");
+const open = require("open");
+
+const server = spawn("npx", ["serve", "-s", "build", "-l", "3000"], {
+  shell: true,
+  stdio: "pipe",
+});
+
+server.stdout.on("data", (data) => {
+  const output = data.toString();
+  console.log(`[stdout] ${output}`);
+
+  if (output.includes("Accepting connections at")) {
+    open("http://localhost:3000");
+  }
+});
+
+server.stderr.on("data", (data) => {
+  console.error(`[stderr] ${data}`);
+});
+
+server.on("close", (code) => {
+  console.log(`Child process exited with code ${code}`);
+});
+
+step-4 pkg server.js --targets node18-win-x64 --output SaralaxeIndia.exe
