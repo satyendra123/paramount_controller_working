@@ -40,13 +40,15 @@ void loop() {
       vehicleNumber = "";
     }
 
-    else if (data == "|OPENEN%") {
-      digitalWrite(13, HIGH);
-      delay(5000);
-      digitalWrite(13, LOW);
-    }
-  }
-
+    else if (data.startsWith("|VEHICLE_NUMBER-")) {
+  vehicleNumber = data.substring(17, data.length() - 1);
+  vehicleNumber.trim();
+  String response = "|C|1|4|1|0-0-" + vehicleNumber + "|";
+  Serial.println(response);
+  displaySerial.println(response);
+  vehicleNumber = "";
+ }
+}
 
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
