@@ -1,3 +1,15 @@
+DMD Pin	Connects To Arduino
+A	D6
+B	D7
+CLK	D11
+OE	D9
+STB/LAT	D10
+DATA	D8
+GND	GND
++5V	5V (external PSU recommended)
+
+
+
 #include <SPI.h>
 #include <DMD.h>
 #include <TimerOne.h>
