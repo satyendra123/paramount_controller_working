@@ -1,6 +1,7 @@
 #include <SPI.h>
 #include <DMD.h>
 #include <TimerOne.h>
+#include "SystemFont5x7.h"
 #include "Arial_black_16.h"
 
 #define DISPLAYS_ACROSS 2
@@ -44,7 +45,8 @@ void loop() {
 
 void showVehicleNumber(const char* number) {
   dmd.clearScreen(true);
-  dmd.selectFont(Arial_Black_16);
+  //dmd.selectFont(Arial_Black_16);
+  dmd.selectFont(SystemFont5x7);
   dmd.drawString(0, 0, number, strlen(number), GRAPHICS_NORMAL);
   delay(2000);
   dmd.clearScreen(true);
@@ -52,8 +54,8 @@ void showVehicleNumber(const char* number) {
 
 void scrollText(const char* text) {
   dmd.clearScreen(true);
-  dmd.selectFont(Arial_Black_16);
-
+  //dmd.selectFont(Arial_Black_16);
+  dmd.selectFont(SystemFont5x7);
   int textLength = strlen(text);
   int textWidth = textLength * 8;
   int displayWidth = DISPLAYS_ACROSS * 32;
@@ -61,30 +63,25 @@ void scrollText(const char* text) {
   for (int pos = displayWidth; pos > -textWidth; pos--) {
     dmd.clearScreen(true);
     dmd.drawString(pos, 0, text, textLength, GRAPHICS_NORMAL);
-    delay(80);
+    delay(50);
   }
   dmd.clearScreen(true);
 }
 
 void showThankYouScreen() {
   dmd.clearScreen(true);
-  dmd.selectFont(Arial_Black_16);
-
-  dmd.drawString(0, 0, "Visit", 5, GRAPHICS_NORMAL);
-  dmd.drawString(0, 8, "Again", 5, GRAPHICS_NORMAL);
-
-  delay(2000);
-  dmd.clearScreen(true);
-
-  dmd.drawString(0, 0, "Thank", 5, GRAPHICS_NORMAL);
-  dmd.drawString(0, 8, "You", 3, GRAPHICS_NORMAL);
-
-  delay(2000);
+  dmd.selectFont(SystemFont5x7);
+  dmd.drawString(0, 0, "Visit Again", strlen("Visit Again"), GRAPHICS_NORMAL);
+  dmd.drawString(0, 8, "Thank You", strlen("Thank You"), GRAPHICS_NORMAL);
+  delay(3000);
   dmd.clearScreen(true);
 }
 
+
+
 void showWelcome() {
   dmd.clearScreen(true);
-  dmd.selectFont(Arial_Black_16);
+  //dmd.selectFont(Arial_Black_16);
+  dmd.selectFont(SystemFont5x7);
   dmd.drawString(0, 0, "WELCOME", 7, GRAPHICS_NORMAL);
 }
