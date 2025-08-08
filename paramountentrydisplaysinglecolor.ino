@@ -1,8 +1,18 @@
 #include <SPI.h>
 #include <DMD.h>
 #include <TimerOne.h>
-#include "SystemFont5x7.h"
-#include "Arial_black_16.h"
+#include "fonts/Droid_Sans_16.h"
+#include "fonts/SystemFont5x7.h"
+#include "fonts/Droid_Sans_12.h"
+// Remove unused Arial_Black_16
+#include "fonts/Arial14.h"
+#include "fonts/Arial_Black_16.h"
+#include "fonts/Droid_Sans_24.h" 
+#include "fonts/Corsiva_12.h"
+#include "fonts/Arial_bold_14.h"
+#include "fonts/Arial12.h"
+#include "fonts/new_fonts_library/Calibri16.h"
+ // Ensure the file is available
 
 #define DISPLAYS_ACROSS 2
 #define DISPLAYS_DOWN 1
@@ -17,10 +27,10 @@ void ScanDMD() {
 
 void setup() {
   Serial.begin(9600);
-  Timer1.initialize(3000);
+  Timer1.initialize(1500);
   Timer1.attachInterrupt(ScanDMD);
   dmd.clearScreen(true);
-  dmd.selectFont(Arial_Black_16);
+  dmd.selectFont(Droid_Sans_16);
   showWelcome();
 }
 
@@ -36,8 +46,9 @@ void loop() {
       number.toCharArray(vehicleNumber, sizeof(vehicleNumber));
 
       showVehicleNumber(vehicleNumber);
-      scrollText("Swagat hai! Please follow parking rules");
+      scrollText("SWAGAT HAI PLEASE FOLLOW THE PARKING RULES");
       showThankYouScreen();
+      delay(2000);
       showWelcome();
     }
   }
@@ -45,24 +56,25 @@ void loop() {
 
 void showVehicleNumber(const char* number) {
   dmd.clearScreen(true);
-  //dmd.selectFont(Arial_Black_16);
-  dmd.selectFont(SystemFont5x7);
-  dmd.drawString(0, 0, number, strlen(number), GRAPHICS_NORMAL);
+  //dmd.selectFont(Arial14);
+  dmd.selectFont(Droid_Sans_12);
+  dmd.drawString(0, 3, number, strlen(number), GRAPHICS_NORMAL);
   delay(2000);
   dmd.clearScreen(true);
 }
 
 void scrollText(const char* text) {
   dmd.clearScreen(true);
-  //dmd.selectFont(Arial_Black_16);
-  dmd.selectFont(SystemFont5x7);
+  //dmd.selectFont(Arial14);
+  dmd.selectFont(Calibri16);
   int textLength = strlen(text);
-  int textWidth = textLength * 8;
+  int charWidth = 8;
+  int textWidth = textLength * charWidth;
   int displayWidth = DISPLAYS_ACROSS * 32;
 
   for (int pos = displayWidth; pos > -textWidth; pos--) {
     dmd.clearScreen(true);
-    dmd.drawString(pos, 0, text, textLength, GRAPHICS_NORMAL);
+    dmd.drawString(pos, 1, text, textLength, GRAPHICS_NORMAL);
     delay(50);
   }
   dmd.clearScreen(true);
@@ -70,18 +82,21 @@ void scrollText(const char* text) {
 
 void showThankYouScreen() {
   dmd.clearScreen(true);
-  dmd.selectFont(SystemFont5x7);
-  dmd.drawString(0, 0, "Visit Again", strlen("Visit Again"), GRAPHICS_NORMAL);
-  dmd.drawString(0, 8, "Thank You", strlen("Thank You"), GRAPHICS_NORMAL);
-  delay(3000);
+  dmd.selectFont(Droid_Sans_12);
+  dmd.drawString(0, 4, "VISITAGAIN", strlen("VISITAGAIN"), GRAPHICS_NORMAL);
+  delay(2000);
+  dmd.clearScreen(true);
+  dmd.drawString(0, 4, "THANKYOU", strlen("THANKYOU"), GRAPHICS_NORMAL);
+  delay(2000);
   dmd.clearScreen(true);
 }
-
-
 
 void showWelcome() {
   dmd.clearScreen(true);
-  //dmd.selectFont(Arial_Black_16);
-  dmd.selectFont(SystemFont5x7);
-  dmd.drawString(0, 0, "WELCOME", 7, GRAPHICS_NORMAL);
-}
+  //dmd.selectFont(Droid_Sans_12);
+  //dmd.selectFont(Arial14);
+  //dmd.selectFont(Arial_bold_14);
+  dmd.selectFont(Calibri16);
+  dmd.drawString(1,1, "WELCOME", strlen("WELCOME"), GRAPHICS_NORMAL);
+  }
+
