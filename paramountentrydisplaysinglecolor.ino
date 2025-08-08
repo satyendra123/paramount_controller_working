@@ -27,7 +27,7 @@ void ScanDMD() {
 
 void setup() {
   Serial.begin(9600);
-  Timer1.initialize(1500);
+  Timer1.initialize(1000);
   Timer1.attachInterrupt(ScanDMD);
   dmd.clearScreen(true);
   dmd.selectFont(Droid_Sans_16);
@@ -44,7 +44,6 @@ void loop() {
       String number = receivedString.substring(17);
       number.trim();
       number.toCharArray(vehicleNumber, sizeof(vehicleNumber));
-
       showVehicleNumber(vehicleNumber);
       scrollText("SWAGAT HAI PLEASE FOLLOW THE PARKING RULES");
       showThankYouScreen();
