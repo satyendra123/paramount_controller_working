@@ -237,9 +237,3 @@ void showWelcome() {
   dmd.selectFont(Calibri16);
   dmd.drawString(1, 1, "WELCOME", strlen("WELCOME"), GRAPHICS_NORMAL);
 }
-
-void showWelcome() {
-  dmd.clearScreen(true);
-  dmd.selectFont(Calibri16);
-  dmd.drawString(1, 1, "WELCOME", strlen("WELCOME"), GRAPHICS_NORMAL);
-}
