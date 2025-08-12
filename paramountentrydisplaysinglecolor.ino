@@ -138,7 +138,7 @@ void ScanDMD() {
 
 void setup() {
   Serial.begin(9600);
-  Timer1.initialize(1000);
+  Timer1.initialize(500);
   Timer1.attachInterrupt(ScanDMD);
   dmd.clearScreen(true);
   dmd.selectFont(Calibri16);
@@ -155,7 +155,6 @@ void loop() {
       String number = receivedString.substring(17);
       number.trim();
       number.toCharArray(vehicleNumber, sizeof(vehicleNumber));
-
       // Interrupt and start showing new vehicle
       currentState = STATE_VEHICLE;
       stateStartTime = millis();
@@ -171,7 +170,8 @@ void loop() {
     case STATE_VEHICLE:
       if (millis() - stateStartTime >= 2000) {
         currentState = STATE_SCROLL;
-        scrollMsg = "SHUBH YATRA THANK YOU FOR PARKING WITH US ";
+        dmd.clearScreen(true);
+        scrollMsg = "SHUBH YATRA THANK YOU FOR PARKING WITH SARLAXEINDIA ";
         scrollPos = DISPLAYS_ACROSS * 32;
         lastUpdate = millis();
       }
@@ -184,7 +184,7 @@ void loop() {
         int charWidth = 8;
         int textWidth = textLength * charWidth;
 
-        dmd.clearScreen(true);
+        //dmd.clearScreen(true);
         dmd.selectFont(Calibri16);
         dmd.drawString(scrollPos, 1, scrollMsg.c_str(), textLength, GRAPHICS_NORMAL);
 
@@ -214,7 +214,6 @@ void loop() {
   }
 }
 
-// ---- Display Functions ----
 void showVehicleNumber(const char* number) {
   dmd.clearScreen(true);
   dmd.selectFont(Droid_Sans_12);
