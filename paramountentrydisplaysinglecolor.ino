@@ -178,7 +178,7 @@ void loop() {
       break;
 
     case STATE_SCROLL:
-      if (millis() - lastUpdate >= 50) {
+      if (millis() - lastUpdate >= 30) {
         lastUpdate = millis();
         int textLength = scrollMsg.length();
         int charWidth = 8;
@@ -230,6 +230,12 @@ void showThankYou2() {
   dmd.clearScreen(true);
   dmd.selectFont(Droid_Sans_12);
   dmd.drawString(0, 4, "THANKYOU", strlen("THANKYOU"), GRAPHICS_NORMAL);
+}
+
+void showWelcome() {
+  dmd.clearScreen(true);
+  dmd.selectFont(Calibri16);
+  dmd.drawString(1, 1, "WELCOME", strlen("WELCOME"), GRAPHICS_NORMAL);
 }
 
 void showWelcome() {
