@@ -1,3 +1,4 @@
+/*
 #include <SPI.h>
 #include <DMD.h>
 #include <TimerOne.h>
@@ -98,8 +99,8 @@ void showWelcome() {
   dmd.selectFont(Calibri16);
   dmd.drawString(1,1, "WELCOME", strlen("WELCOME"), GRAPHICS_NORMAL);
   }
+*/
 
-//EX-2 fully non blocking code
 #include <SPI.h>
 #include <DMD.h>
 #include <TimerOne.h>
@@ -165,13 +166,12 @@ void loop() {
   // ---- State Machine ----
   switch (currentState) {
     case STATE_WELCOME:
-      // Stay here until new data comes
       break;
 
     case STATE_VEHICLE:
-      if (millis() - stateStartTime >= 2000) { // 2 sec for vehicle display
+      if (millis() - stateStartTime >= 2000) {
         currentState = STATE_SCROLL;
-        scrollMsg = "SWAGAT HAI PLEASE FOLLOW THE PARKING RULES";
+        scrollMsg = "SHUBH YATRA THANK YOU FOR PARKING WITH US ";
         scrollPos = DISPLAYS_ACROSS * 32;
         lastUpdate = millis();
       }
